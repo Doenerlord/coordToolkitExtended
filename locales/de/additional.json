@@ -1,0 +1,9 @@
+{
+  "modules": {
+    "coordToolkitExtended": {
+      "heightLabelAdria": "Höhe Adria",
+      "heightLabelWienerNull": "Höhe Wiener Null",
+      "copyHeightBtn": "Höhe kopieren"
+    }
+  }
+}
