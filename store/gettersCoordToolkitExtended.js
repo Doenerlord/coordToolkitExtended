@@ -3,7 +3,10 @@ import crs from "@masterportal/masterportalapi/src/crs";
 import {generateSimpleGetters} from "../../../src/shared/js/utils/generators";
 import coordState from "./stateCoordToolkitExtended";
 
-
+/**
+ * The getters for the CoodToolkit.
+ * @module modules/coordToolkit/store/gettersCoordToolkitExtended
+ */
 export default {
     ...generateSimpleGetters(coordState),
 
