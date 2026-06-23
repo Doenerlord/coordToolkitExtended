@@ -2,7 +2,7 @@
   "modules": {
     "coordToolkitExtended": {
       "heightLabelAdria": "Height above Adria",
-      "heightLabelWienerNull": "Height Wiener Null",
+      "heightLabelWienerNull": "Height above Wiener Null",
       "copyHeightBtn": "Copy height"
     }
   }

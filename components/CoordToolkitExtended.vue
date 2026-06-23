@@ -95,7 +95,7 @@ export default {
          * Returns the height, formatted to two decimal places.
          * @returns {String} The formatted height.
          */
-        formattedHeight () {
+        heightAdria () {
             heightAsFloat = parseFloat(this.height);
 
             heightAsFloat += 156.68
@@ -408,7 +408,18 @@ export default {
                 const el = this.$refs[id];
 
                 if (el) {
-                    values.push(el.value);
+                    // Support InputText component or native input
+                    let val = "";
+
+                    if (el.$el && el.$el.querySelector) {
+                        const input = el.$el.querySelector("input");
+
+                        val = input ? input.value : "";
+                    }
+                    else if (el.value !== undefined) {
+                        val = el.value;
+                    }
+                    values.push(val);
                 }
             });
             if (this.currentProjection.projName === "longlat") {
@@ -517,12 +528,12 @@ export default {
                 <InputText
                     :id="'coordinatesEastingField'"
                     ref="coordinatesEastingField"
-                    :value="coordinatesEasting.value"
+                    v-model="coordinatesEasting.value"
                     :label="$t(getLabel('eastingLabel'))"
                     :placeholder="isEnabled('search') ? $t('common:modules.coordToolkit.exampleAcronym') + coordinatesEastingExample : ''"
-                    :input="(value) => onInputEvent(value, coordinatesEasting)"
                     :readonly="isEnabled('supply')"
                     :class-obj="{ inputError: getEastingError }"
+                    @input="(value) => onInputEvent(value, coordinatesEasting)"
                 >
                     <div
                         v-if="isEnabled('supply') && !isMobile && showCopyButtons"
@@ -566,12 +577,12 @@ export default {
                 <InputText
                     :id="'coordinatesNorthingField'"
                     ref="coordinatesNorthingField"
+                    v-model="coordinatesNorthing.value"
                     :label="$t(getLabel('northingLabel'))"
                     :placeholder="isEnabled('search') ? $t('common:modules.coordToolkit.exampleAcronym') + coordinatesNorthingExample : ''"
-                    :value="coordinatesNorthing.value"
-                    :input="(value) => onInputEvent(value, coordinatesNorthing)"
                     :readonly="isEnabled('supply')"
                     :class-obj="{ inputError: getNorthingError }"
+                    @input="(value) => onInputEvent(value, coordinatesNorthing)"
                 >
                     <div
                         v-if="isEnabled('supply') && !isMobile && showCopyButtons"
@@ -660,10 +671,11 @@ export default {
                     :id="'coordinatesHeightLabel'"
                     ref="coordinatesHeightLabel"
                     :label="$t('additional:modules.coordToolkitExtended.heightLabelWienerNull')"
-                    :value="$t(height)"
-                    :readonly="true"
+                    :model-value="$t(height)"
+                    readonly
                     :placeholder="$t('additional:modules.coordToolkitExtended.heightLabelWienerNull')"
                     >
+                    
                     <div
                         v-if="isEnabled('supply') && !isMobile && showCopyButtons"
                         class="copyBtn"
@@ -690,8 +702,8 @@ export default {
                     :id="'coordinatesHeightLabelAdria'"
                     ref="coordinatesHeightLabelAdria"
                     :label="$t('additional:modules.coordToolkitExtended.heightLabelAdria')"
-                    :value="formattedHeight"
-                    :readonly="true"
+                    :model-value="$t(heightAdria)"
+                    readonly
                     :placeholder="$t('additional:modules.coordToolkitExtended.heightLabelAdria')"
                 >
                 <div

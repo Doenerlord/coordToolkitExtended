@@ -568,4 +568,3 @@ export default {
         dispatch("Maps/setCenter", newCoords, {root: true});
     }
 };
-
